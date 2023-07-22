@@ -42,3 +42,9 @@ services:
   - sshd
   - sssd
   - firewalld
+
+# Disable unused services
+unused_services:
+  - avahi-daemon
+  - cups
+  - ufw

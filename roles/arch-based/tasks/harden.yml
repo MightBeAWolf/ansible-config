@@ -1,0 +1,24 @@
+---
+
+- name: Ensure secure SSH configuration
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no' }
+    - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no' }
+    - { regexp: '^PermitEmptyPasswords', line: 'PermitEmptyPasswords no' }
+    - { regexp: '^ChallengeResponseAuthentication', line: 'ChallengeResponseAuthentication no' }
+  notify:
+    - Restart sshd
+  become: true
+
+
+- name: Start and Enable firewalld service
+  systemd:
+    name: firewalld
+    state: started
+    enabled: yes
+  become: true
+

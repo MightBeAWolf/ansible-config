@@ -10,3 +10,8 @@
   include_tasks: packages.yml
   tags:
     - setup
+
+- name: Harden the configurations
+  include_tasks: harden.yml
+  tags:
+    - hardening
