@@ -1,7 +1,25 @@
 ---
 
-- name: Update packages
+- name: Check for upgradable packages
+  command: pacman -Qu
+  register: upgradable_packages
+  changed_when: false
+  failed_when: upgradable_packages.rc > 1
+  ignore_errors: true
+
+- name: Check if kernel is in the upgradable packages
+  set_fact:
+    kernel_upgradable: "{{ 'linux' in upgradable_packages.stdout }}"
+
+- name: Upgrade all packages
   pacman:
-      update_cache: true
-      upgrade: true
+    update_cache: true
+    upgrade: true
   become: true
+  when: upgradable_packages.stdout | length > 0
+  register: pacman_output
+
+- name: Signal reboot if kernel was upgraded
+  command: echo "Kernel was upgraded, system will reboot."
+  notify: reboot host
+  when: kernel_upgradable
