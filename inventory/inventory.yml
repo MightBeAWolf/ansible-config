@@ -12,6 +12,8 @@ purposes:
         wolfpaw:
         bite:
         wolftrack:
+      vars:
+        headless: true
 
     laptops:
       hosts:
