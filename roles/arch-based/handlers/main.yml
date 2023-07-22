@@ -1,0 +1,9 @@
+---
+- name: Restart {{ item }}
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop: "{{ services }}"
+
+- name: Reboot system
+  reboot:

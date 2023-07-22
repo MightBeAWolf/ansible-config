@@ -1,0 +1,7 @@
+---
+
+- name: Update packages
+  pacman:
+      update_cache: true
+      upgrade: true
+  become: true

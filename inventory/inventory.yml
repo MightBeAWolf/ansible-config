@@ -1,0 +1,50 @@
+all:
+  hosts:
+    wolfpaw:
+    bite:
+    wolftrack:
+    carnivore:
+
+purposes:
+  children:
+    servers:
+      hosts:
+        wolfpaw:
+        bite:
+        wolftrack:
+
+    laptops:
+      hosts:
+        carnivore:
+
+    dns_servers:
+      hosts:
+        bite:
+
+    podman_hosts:
+      hosts:
+        bite:
+
+platforms:
+  children:
+    arch:
+      hosts:
+        wolfpaw:
+        bite:
+
+    endeavour:
+      hosts:
+        carnivore:
+
+    synology:
+      hosts:
+        wolftrack:
+
+groups:
+  children:
+
+    arch_based:
+      children:
+        arch:
+        endeavour:
+

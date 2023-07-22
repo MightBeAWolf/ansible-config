@@ -1,0 +1,12 @@
+---
+
+- name: Update arch packages
+  include_tasks: update.yml
+  tags:
+    - setup
+    - update
+
+- name: Install necessary arch packages
+  include_tasks: packages.yml
+  tags:
+    - setup

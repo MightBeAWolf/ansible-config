@@ -1,0 +1,44 @@
+---
+packages:
+  headless:
+    #development
+    - gcc
+    - make
+    - cmake
+    - python
+    #cli tools
+    - vim
+    - exa
+    - bat
+    - helix
+    - git
+    - fd
+    - ripgrep
+    #system
+    - htop
+    - bash-completion
+    - keychain
+    - procs
+    - pueue
+    #network
+    - nfs-utils
+    - curl
+    - openssh
+    - rsync
+    - nmap
+    #security
+    - firewalld
+    #ldap
+    - sssd
+    - nss-pam-ldapd
+
+  graphical:
+    # productivity
+    - firefox
+    # misc
+    - flameshot
+
+services:
+  - sshd
+  - sssd
+  - firewalld

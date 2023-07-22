@@ -1,0 +1,14 @@
+---
+
+- name: Install headless packages
+  pacman:
+    name: "{{ packages.headless }}"
+    state: present
+  become: true
+
+- name: Install graphical packages
+  pacman:
+    name: "{{ packages.graphical }}"
+    state: present
+  when: headless is not defined or not headless
+  become: true

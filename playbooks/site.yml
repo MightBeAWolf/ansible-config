@@ -1,0 +1,6 @@
+---
+
+- hosts: arch_based:!down
+  roles:
+    - role: arch-based
+
