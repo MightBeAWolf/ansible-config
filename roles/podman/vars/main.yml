@@ -1,0 +1,7 @@
+---
+# vars file for roles/podman
+users:
+  - name: tgreyw
+    subuid: 100000:65536
+    subgid: 100000:65536
+

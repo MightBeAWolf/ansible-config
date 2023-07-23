@@ -1,0 +1,27 @@
+---
+- name: Update package list
+  package:
+    update_cache: yes
+  become: yes
+
+- name: Install podman packages
+  package:
+    name: "{{ packages }}"
+    state: present
+  become: yes
+
+- name: Configure /etc/subuid
+  lineinfile:
+    path: /etc/subuid
+    line: '{{ item.name }}:{{ item.subuid }}'
+    create: yes
+  become: yes
+  loop: "{{ users }}"
+
+- name: Configure /etc/subgid
+  lineinfile:
+    path: /etc/subgid
+    line: '{{ item.name }}:{{ item.subgid }}'
+    create: yes
+  become: yes
+  loop: "{{ users }}"

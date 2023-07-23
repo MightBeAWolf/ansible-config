@@ -4,3 +4,8 @@
   roles:
     - role: arch-based
 
+- hosts: podman_hosts:!down
+  roles:
+    - role: podman
+  tags:
+    - podman

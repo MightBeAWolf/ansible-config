@@ -1,0 +1,8 @@
+---
+# defaults file for roles/podman
+packages:
+  - podman
+  - buildah
+  - fuse-overlayfs
+  - netavark
+  - aardvark-dns

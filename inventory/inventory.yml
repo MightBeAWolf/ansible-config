@@ -5,6 +5,9 @@ all:
     wolftrack:
     carnivore:
 
+down:
+  hosts:
+
 purposes:
   children:
     servers:
@@ -26,6 +29,8 @@ purposes:
     podman_hosts:
       hosts:
         bite:
+        wolfpaw:
+        carnivore:
 
 platforms:
   children:
