@@ -1,0 +1,4 @@
+---
+git_repo: "http://192.168.86.11:5002/tgreyw/dns"
+project_dir: "/opt/dns"
+image_name: dns

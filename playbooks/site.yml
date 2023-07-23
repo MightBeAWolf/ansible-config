@@ -9,3 +9,9 @@
     - role: podman
   tags:
     - podman
+
+- hosts: dns_servers:!down
+  roles:
+    - role: dns-server
+  tags:
+    - dns
