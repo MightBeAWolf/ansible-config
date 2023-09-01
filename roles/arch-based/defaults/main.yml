@@ -31,6 +31,9 @@ packages:
     #ldap
     - sssd
     - nss-pam-ldapd
+    # shell customization
+    - vivid
+    - thefuck
 
   graphical:
     # productivity
