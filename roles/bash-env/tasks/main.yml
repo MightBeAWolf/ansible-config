@@ -1,0 +1,17 @@
+# tasks/main.yml
+---
+- name: Copy .bashrc if needed
+  copy:
+    src: bashrc
+    dest: "~/.bashrc"
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
+    mode: '0750'
+
+- name: Copy .bashrc.d/ directory if needed
+  copy:
+    src: bashrc.d/
+    dest: "~/.bashrc.d"
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
+    mode: '0755'

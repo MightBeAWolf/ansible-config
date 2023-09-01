@@ -1,5 +1,9 @@
 ---
 
+- hosts: linux:!down
+  roles:
+    - role: bash-env
+
 - hosts: arch_based:!down
   roles:
     - role: arch-based

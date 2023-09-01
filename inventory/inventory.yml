@@ -49,6 +49,11 @@ platforms:
 
 groups:
   children:
+    linux:
+      children:
+        arch:
+        endeavour:
+        synology:
 
     arch_based:
       children:
