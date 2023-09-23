@@ -41,6 +41,7 @@ packages:
     - firefox
     # misc
     - flameshot
+    - gammastep
 
 services:
   - sshd
