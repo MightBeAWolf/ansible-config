@@ -27,5 +27,8 @@
   become: yes
   notify: Restart the DNS
 
+- name: Make sure the podman container is running
+  include_tasks: ./start-dns.yml
+
 
 

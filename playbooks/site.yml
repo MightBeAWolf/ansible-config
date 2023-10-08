@@ -3,6 +3,12 @@
 - hosts: linux:!down
   roles:
     - role: bash-env
+    # - role: dns-client
+
+# Not synology linux machines
+- hosts: linux:!synology:!down
+  roles:
+    # - role: dns-client
 
 - hosts: arch_based:!down
   roles:

@@ -1,15 +1,3 @@
-- name: Stop systemd-resolve if running
-  systemd:
-    name: systemd-resolved
-    state: stopped
-  become: yes
-
-- name: Disable systemd-resolve
-  systemd:
-    name: systemd-resolved
-    enabled: no
-  become: yes
-
 - name: Check if podman container is running
   shell: podman ps -qa --filter "name={{ image_name }}"
   register: container_status
@@ -24,8 +12,5 @@
   when: container_status.stdout != ''
   become: yes
 
-- name: Run the DNS image
-  command: make start
-  args:
-    chdir: "{{ project_dir }}"
-  become: yes
+- name: Make sure the podman container is running
+  include_tasks: ./start-dns.yml

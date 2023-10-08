@@ -4,6 +4,7 @@
   pacman:
     name: "{{ packages.headless }}"
     state: present
+  ignore_errors: true
   become: true
 
 - name: Install graphical packages
@@ -11,4 +12,5 @@
     name: "{{ packages.graphical }}"
     state: present
   when: headless is not defined or not headless
+  ignore_errors: true
   become: true
