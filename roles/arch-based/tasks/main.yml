@@ -11,6 +11,12 @@
   tags:
     - setup
 
+- name: Ensure services are running
+  include_tasks: services.yml
+  tags:
+    - setup
+    - update
+
 - name: Harden the configurations
   include_tasks: harden.yml
   tags:

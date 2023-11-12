@@ -21,6 +21,9 @@ packages:
     - procs
     - pueue
     #network
+    - networkmanager
+    - networkmanager-openvpn
+    - networkmanager-openconnect
     - nfs-utils
     - curl
     - openssh
@@ -43,10 +46,10 @@ packages:
     - flameshot
     - gammastep
 
-services:
+enabled_services:
   - sshd
-  - sssd
   - firewalld
+  - NetworkManager
 
 # Disable unused services
 unused_services:

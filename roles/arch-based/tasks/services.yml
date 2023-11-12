@@ -1,0 +1,6 @@
+- name: Ensure services are running and enabled
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: "{{ enabled_services }}"
