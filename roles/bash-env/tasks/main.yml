@@ -1,7 +1,7 @@
 # tasks/main.yml
 ---
 - name: Install software from installers list
-  include_tasks: check_and_install.yml
+  include_tasks: ../../shared/tasks/check_and_install.yml
   loop: "{{ installers }}"
 
 - name: Ensure Git is installed

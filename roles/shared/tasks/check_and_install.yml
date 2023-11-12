@@ -8,7 +8,8 @@
   changed_when: false
 
 - name: Install {{ item.name }}
-  shell: "curl -sSL {{installer_repo_url}}/{{ item.file }} | bash"
+  shell: "curl -sSL {{installer_repo_url}}/{{ item.file }} | bash -x"
   when: check_result.rc != 0
+  become: "{{ item.become | default(false) }}"
   args:
     executable: /bin/bash

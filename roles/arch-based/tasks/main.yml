@@ -11,6 +11,12 @@
   tags:
     - setup
 
+- name: Install software from installers list
+  include_tasks: ../../shared/tasks/check_and_install.yml
+  loop: "{{ installers }}"
+  tags:
+      setup
+
 - name: Ensure services are running
   include_tasks: services.yml
   tags:
