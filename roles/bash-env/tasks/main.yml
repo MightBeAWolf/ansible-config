@@ -1,13 +1,19 @@
 # tasks/main.yml
 ---
-- name: Copy .bashrc if needed
-  copy:
-    src: bashrc
-    dest: "~/.bashrc"
-    mode: '0750'
+- name: Ensure Git is installed
+  package:
+    name: git
+    state: present
 
-- name: Copy .bashrc.d/ directory if needed
-  copy:
-    src: bashrc.d/
-    dest: "~/.bashrc.d"
-    mode: '0750'
+- name: Clone bashrc repository
+  git:
+    repo: 'https://github.com/MightBeAWolf/bashrc.git'
+    dest: ~/.bashrc.d
+
+- name: Create soft link for bashrc
+  file:
+    src: ~/.bashrc.d/bashrc
+    dest: ~/.bashrc
+    state: link
+    force: yes
+
