@@ -1,5 +1,6 @@
 all:
   hosts:
+    wolfden:
     wolfpaw:
     bite:
     wolftrack:
@@ -17,6 +18,10 @@ purposes:
         wolftrack:
       vars:
         headless: true
+
+    desktop:
+      hosts:
+        wolfden:
 
     laptops:
       hosts:
@@ -36,6 +41,7 @@ platforms:
   children:
     arch:
       hosts:
+        wolfden:
         wolfpaw:
         bite:
 
@@ -59,4 +65,3 @@ groups:
       children:
         arch:
         endeavour:
-
