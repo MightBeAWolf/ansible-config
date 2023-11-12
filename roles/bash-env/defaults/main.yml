@@ -1,0 +1,10 @@
+installers:
+  - name: "Rust"
+    check: "test -e ${HOME}/.cargo/bin/cargo"
+    file: "00-rust.sh"
+  - name: "Starship"
+    check: "which starship"
+    file: "00-starship.sh"
+  - name: "Helix"
+    check: "which helix || which hx"
+    file: "01-helix.sh"

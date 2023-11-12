@@ -1,0 +1,14 @@
+# check_and_install.yml
+
+- name: Check if {{ item.name }} is already installed
+  shell: "{{ item.check }}"
+  register: check_result
+  ignore_errors: yes
+  # failed_when: false
+  changed_when: false
+
+- name: Install {{ item.name }}
+  shell: "curl -sSL {{installer_repo_url}}/{{ item.file }} | bash"
+  when: check_result.rc != 0
+  args:
+    executable: /bin/bash
