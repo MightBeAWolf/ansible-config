@@ -1,5 +1,9 @@
 ---
 
+- hosts: arch_based:!down
+  roles:
+    - role: arch-based
+
 - hosts: linux:!down
   roles:
     - role: bash-env
@@ -9,10 +13,6 @@
 - hosts: linux:!synology:!down
   roles:
     # - role: dns-client
-
-- hosts: arch_based:!down
-  roles:
-    - role: arch-based
 
 - hosts: podman_hosts:!down
   roles:
