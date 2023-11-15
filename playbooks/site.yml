@@ -25,3 +25,9 @@
     - role: dns-server
   tags:
     - dns
+
+- hosts: desktop
+  roles:
+    - role: hyperland
+  tags:
+    - dm

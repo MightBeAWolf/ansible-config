@@ -1,0 +1,26 @@
+---
+packages:
+  # Greeter
+  - greetd
+  - greetd-tuigreet
+
+  # Main Window Manager Components
+  - hyprland # Window Manager
+  - waybar # Status Bar
+  - mako # Notification System
+
+  # Recommended by hyperland
+  - xdg-desktop-portal-hyprland
+  - polkit-kde-agent
+  - qt5-wayland
+  - qt6-wayland
+
+  # Audio
+  - pipewire #Low-latency audio/video router and processor
+  - pipewire-alsa #Low-latency audio/video router and processor - ALSA configuration
+  - pipewire-audio #Low-latency audio/video router and processor - Audio support
+  - pipewire-pulse #Low-latency audio/video router and processor - PulseAudio replacement
+  - wireplumber #Session / policy manager implementation for PipeWire
+  - gst-plugin-pipewire #Multimedia graph framework - pipewire plugin
+  - libpipewire #Low-latency audio/video router and processor - client library
+  - libwireplumber #Session / policy manager implementation for PipeWire - client library

@@ -1,0 +1,43 @@
+---
+- name: Install packages
+  pacman:
+    name: "{{ packages }}"
+    state: present
+  ignore_errors: true
+  become: true
+
+- name: Create greetd config directory
+  ansible.builtin.file:
+    path: /etc/greetd
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Copy greetd config
+  ansible.builtin.copy:
+    src: ../files/greetd.conf
+    dest: /etc/greetd/config.toml
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Ensure greetd is running and enabled
+  service:
+    name: "greetd"
+    state: "started"
+    enabled: yes
+  become: true
+
+- name: Create hypr config directory
+  ansible.builtin.file:
+    path: ~/.config/hypr
+    state: directory
+
+- name: Copy hyperland config
+  ansible.builtin.copy:
+    src: ../files/hyperland.conf
+    dest: ~/.config/hypr/hyprland.conf
+

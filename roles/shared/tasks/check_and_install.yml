@@ -4,7 +4,7 @@
   shell: "{{ item.check }}"
   register: check_result
   ignore_errors: yes
-  # failed_when: false
+  failed_when: false
   changed_when: false
 
 - name: Install {{ item.name }}

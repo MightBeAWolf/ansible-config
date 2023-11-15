@@ -45,6 +45,8 @@ packages:
     # misc
     - flameshot
     - gammastep
+    # misc
+    - alacritty
 
 enabled_services:
   - sshd

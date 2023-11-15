@@ -3,19 +3,16 @@
   systemd:
     name: sshd
     state: restarted
-  loop: "{{ services }}"
 
 - name: Restart sssd
   systemd:
     name: sssd
     state: restarted
-  loop: "{{ services }}"
 
 - name: Restart firewalld
   systemd:
     name: firewalld
     state: restarted
-  loop: "{{ services }}"
 
 - name: Reboot system
   reboot:
