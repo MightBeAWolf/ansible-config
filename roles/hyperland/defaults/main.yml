@@ -24,3 +24,17 @@ packages:
   - gst-plugin-pipewire #Multimedia graph framework - pipewire plugin
   - libpipewire #Low-latency audio/video router and processor - client library
   - libwireplumber #Session / policy manager implementation for PipeWire - client library
+
+  # Additional Packages
+  - copyq
+  - gammastep
+
+config_repo_url: https://github.com/MightBeAWolf/dot-config.git
+config_branch: main
+configs:
+  - hypr
+  - waybar
+  - copyq
+  - alacritty
+  - gammastep
+  

@@ -17,6 +17,17 @@
 #   tags:
 #     - setup
 
+- name: Install user configurations
+  include_tasks: ../../shared/tasks/git-sparse-checkout.yml
+  vars:
+    repo_url: "{{ config_repo_url }}"
+    branch: "{{ config_branch }}"
+    base_dir: "{{ lookup('env', 'HOME') }}/.config"
+    config_files: "{{ configs }}"
+  tags:
+    - setup
+    - update
+
 - name: Ensure services are running
   include_tasks: services.yml
   tags:

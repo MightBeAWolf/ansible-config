@@ -6,6 +6,7 @@
   ignore_errors: true
   become: true
 
+
 - name: Create greetd config directory
   ansible.builtin.file:
     path: /etc/greetd
@@ -31,13 +32,12 @@
     enabled: yes
   become: true
 
-- name: Create hypr config directory
-  ansible.builtin.file:
-    path: ~/.config/hypr
-    state: directory
+- name: Install user configurations
+  include_tasks: ../../shared/tasks/git-sparse-checkout.yml
+  vars:
+    repo_url: "{{ config_repo_url }}"
+    branch: "{{ config_branch }}"
+    base_dir: "{{ lookup('env', 'HOME') }}/.config"
+    config_files: "{{ configs }}"
 
-- name: Copy hyperland config
-  ansible.builtin.copy:
-    src: ../files/hyperland.conf
-    dest: ~/.config/hypr/hyprland.conf
 

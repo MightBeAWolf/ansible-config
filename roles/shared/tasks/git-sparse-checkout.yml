@@ -1,0 +1,42 @@
+- name: Ensure git repository destination exists
+  file:
+    path: "{{ base_dir }}"
+    state: directory
+
+- name: Prepare sparse git repository
+  shell: |
+    git init -b {{ branch }}
+    git sparse-checkout init
+    git remote add origin {{ repo_url }}
+  args:
+    chdir: "{{ base_dir }}"
+    creates: "{{ base_dir }}/.git"
+
+- name: Configure base sparse-checkout
+  lineinfile:
+    path: "{{ base_dir }}/.git/info/sparse-checkout"
+    line: "{{ item.line }}"
+    state: "{{ item.state }}"
+  loop: 
+    - line: "/*"
+      state: "absent"
+    - line: "!/*/"
+      state: "absent"
+    - line: "/.gitignore"
+      state: "present"
+
+
+- name: Configure sparse-checkout additions
+  lineinfile:
+    path: "{{ base_dir }}/.git/info/sparse-checkout"
+    line: "{{ item }}"
+    state: present
+  loop: "{{ config_files }}"
+
+- name: Pull
+  git:
+    repo: "{{ repo_url }}"
+    version: "{{ branch }}"
+    dest: "{{ base_dir }}"
+    update: true
+  
