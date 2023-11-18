@@ -16,6 +16,8 @@ packages:
     - git
     - fd
     - ripgrep
+    - zip
+    - unzip
     #system
     - htop
     - bash-completion
@@ -66,6 +68,9 @@ installers:
   - name: "Rust"
     check: "test -e ${HOME}/.cargo/bin/cargo"
     file: "00-rust.sh"
+  - name: "Rust CLI Tools"
+    check: "test -e ${HOME}/.cargo/bin/tldr"
+    file: "01-rust-cli-tools.sh"
   - name: "Paru"
     check: "test -e ${HOME}/.cargo/bin/paru"
     file: "01-aur-paru.sh"
@@ -76,4 +81,5 @@ configs:
   - helix
   - thefuck
   - starship.toml
+  - paru
   
