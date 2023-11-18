@@ -16,7 +16,7 @@
   vars:
     repo_url: "{{ config_repo_url }}"
     branch: "{{ config_branch }}"
-    base_dir: "{{ lookup('env', 'HOME') }}/.config"
+    base_dir: "{{ ansible_env.HOME }}/.config"
     config_files: "{{ configs }}"
   tags:
     - setup

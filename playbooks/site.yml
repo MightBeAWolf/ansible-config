@@ -31,3 +31,9 @@
     - role: hyperland
   tags:
     - dm
+
+- hosts: laptops
+  roles:
+    - role: sway
+  tags:
+    - dm

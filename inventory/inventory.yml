@@ -1,10 +1,15 @@
 all:
   hosts:
     wolfden:
+      ansible_user: gwolf
     wolfpaw:
+      ansible_user: tgreyw
     bite:
+      ansible_user: tgreyw
     wolftrack:
+      ansible_user: tgreyw
     carnivore:
+      ansible_user: tgreyw
 
 down:
   hosts:
