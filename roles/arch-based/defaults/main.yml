@@ -18,6 +18,7 @@ packages:
     - ripgrep
     - zip
     - unzip
+    - mdcat
     #system
     - htop
     - bash-completion
