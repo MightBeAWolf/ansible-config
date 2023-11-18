@@ -24,7 +24,7 @@
 
 - hosts: wolfden
   roles:
-    - role: sway
+    - role: hyperland
 
 - hosts: bite
   roles:
