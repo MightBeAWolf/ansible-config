@@ -1,39 +1,31 @@
 ---
 
-- hosts: arch_based:!down
+- hosts: arch_based
   roles:
     - role: arch-based
+    - role: bash-env
+    - role: podman
 
-- hosts: linux:!down
+- hosts: linux
   roles:
     - role: bash-env
-    # - role: dns-client
 
 # Not synology linux machines
 - hosts: linux:!synology:!down
   roles:
     # - role: dns-client
 
-- hosts: podman_hosts:!down
-  roles:
-    - role: podman
-  tags:
-    - podman
-
-- hosts: dns_servers:!down
-  roles:
-    - role: dns-server
-  tags:
-    - dns
-
-- hosts: desktop
-  roles:
-    - role: hyperland
-  tags:
-    - dm
-
-- hosts: laptops
+###################################
+####### Host Specific Roles #######
+###################################
+- hosts: carnivore
   roles:
     - role: sway
-  tags:
-    - dm
+
+- hosts: wolfden
+  roles:
+    - role: sway
+
+- hosts: bite
+  roles:
+    - role: dns-server
