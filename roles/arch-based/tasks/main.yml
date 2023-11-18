@@ -11,12 +11,6 @@
   tags:
     - setup
 
-# - name: Install software from installers list
-#   include_tasks: ../../shared/tasks/check_and_install.yml
-#   loop: "{{ installers }}"
-#   tags:
-#     - setup
-
 - name: Install user configurations
   include_tasks: ../../shared/tasks/git-sparse-checkout.yml
   vars:

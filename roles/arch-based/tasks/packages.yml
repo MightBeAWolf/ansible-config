@@ -14,3 +14,10 @@
   when: headless is not defined or not headless
   ignore_errors: true
   become: true
+
+- name: Install software from installers list
+  include_tasks: ../../shared/tasks/check_and_install.yml
+  loop: "{{ installers }}"
+  tags:
+    - setup
+

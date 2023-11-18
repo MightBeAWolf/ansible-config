@@ -62,6 +62,14 @@ unused_services:
   - cups
   - ufw
 
+installers:
+  - name: "Rust"
+    check: "test -e ${HOME}/.cargo/bin/cargo"
+    file: "00-rust.sh"
+  - name: "Paru"
+    check: "test -e ${HOME}/.cargo/bin/paru"
+    file: "01-aur-paru.sh"
+
 config_repo_url: https://github.com/MightBeAWolf/dot-config.git
 config_branch: main
 configs:
