@@ -6,6 +6,8 @@ packages:
     - make
     - cmake
     - python
+    - base-devel
+    - go
     #cli tools
     - vim
     - exa
