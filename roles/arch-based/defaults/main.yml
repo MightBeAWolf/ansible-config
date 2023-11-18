@@ -33,6 +33,7 @@ packages:
     - openssh
     - rsync
     - nmap
+    - libnma # Dependency of pia vpn
     #security
     - firewalld
     #ldap
