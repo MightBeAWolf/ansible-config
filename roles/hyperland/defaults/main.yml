@@ -8,12 +8,17 @@ packages:
   - hyprland # Window Manager
   - waybar # Status Bar
   - mako # Notification System
+  - swaylock # Lockscreen
 
   # Recommended by hyperland
   - xdg-desktop-portal-hyprland
   - polkit-kde-agent
   - qt5-wayland
   - qt6-wayland
+
+  # misc dependencies
+  - jq
+  - socat
 
   # Audio
   - pipewire #Low-latency audio/video router and processor
@@ -43,6 +48,8 @@ config_branch: main
 configs:
   - hypr
   - waybar
+  - swaylock
+  - eww
   - copyq
   - alacritty
   - gammastep
