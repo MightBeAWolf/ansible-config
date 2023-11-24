@@ -9,6 +9,7 @@ packages:
   - waybar # Status Bar
   - mako # Notification System
   - swaylock # Lockscreen
+  - swayidle # Idle management daemon
 
   # Recommended by hyperland
   - xdg-desktop-portal-hyprland
