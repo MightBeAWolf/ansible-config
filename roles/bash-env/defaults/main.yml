@@ -9,5 +9,5 @@ installers:
     check: "which helix || which hx"
     file: "01-helix.sh"
   - name: "Fuzzy Finder"
-    check: "${HOME}/.fzf"
+    check: "test -e ${HOME}/.fzf"
     file: "01-fzf.sh"
