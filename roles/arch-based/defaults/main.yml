@@ -8,6 +8,8 @@ packages:
     - python
     - base-devel
     - go
+    - bash-language-server
+    - shellcheck
     #cli tools
     - vim
     - exa
