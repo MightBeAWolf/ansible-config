@@ -19,6 +19,7 @@ packages:
     - zip
     - unzip
     - mdcat
+    - yt-dlp
     #system
     - htop
     - bash-completion
@@ -54,6 +55,7 @@ packages:
     - gammastep
     # misc
     - alacritty
+    - vlc
 
 enabled_services:
   - sshd
