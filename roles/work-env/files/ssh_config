@@ -1,0 +1,12 @@
+IdentitiesOnly yes
+AddKeysToAgent yes
+
+MATCH host "gitea,10.1.10.220"
+    HostName 10.1.10.220
+    User gitea
+    Port 222
+    IdentityFile ~/.ssh/id_ed25519
+
+MATCH host "*.sti.com"
+    IdentityFile ~/.ssh/id_ed25519
+
