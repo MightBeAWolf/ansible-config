@@ -1,0 +1,14 @@
+all:
+  hosts:
+    olympic.sti.com:
+      ansible_user: tommy
+
+centos_stream8:
+  hosts:
+    olympic.sti.com
+
+
+workstation:
+  hosts:
+    olympic.sti.com
+
