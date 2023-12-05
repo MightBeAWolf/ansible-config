@@ -4,10 +4,19 @@
   include_tasks: ../../shared/tasks/check_and_install.yml
   loop: "{{ installers }}"
 
-- name: Ensure Git is installed
+# Note that we use the 'Check if Git binary is present' as it doesn't inherently
+# require privlaged acces, while the 'package' module does.
+- name: Check if Git binary is present
+  command: which git
+  register: git_check
+  failed_when: false
+  changed_when: false
+
+- name: Install git
   package:
     name: git
     state: present
+  when: git_check.rc != 0
 
 - name: Clone bashrc repository
   git:
@@ -20,4 +29,15 @@
     dest: ~/.bashrc
     state: link
     force: yes
+
+- name: Enable dot configs
+  include_tasks: ../../shared/tasks/git-sparse-checkout.yml
+  vars:
+    repo_url: "{{ config_repo_url }}"
+    branch: "{{ config_branch }}"
+    base_dir: "{{ ansible_env.HOME }}/.config"
+    config_files: "{{ configs }}"
+  tags:
+    - setup
+    - update
 
