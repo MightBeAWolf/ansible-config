@@ -1,0 +1,10 @@
+# All installers covered in the bash rol
+# installers:
+  # - name: "Rust"
+  #   check: "test -e ${HOME}/.cargo/bin/cargo"
+  #   file: "00-rust.sh"
+
+config_repo_url: https://github.com/MightBeAWolf/dot-config.git
+config_branch: main
+configs:
+  - cadence.cdsenv

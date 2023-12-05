@@ -3,4 +3,5 @@
 - hosts: workstation
   roles:
     - role: bash-env
+    - role: work-env
 
