@@ -1,8 +1,5 @@
 # tasks/main.yml
 ---
-- name: Install software from installers list
-  include_tasks: ../../shared/tasks/check_and_install.yml
-  loop: "{{ installers }}"
 
 # Note that we use the 'Check if Git binary is present' as it doesn't inherently
 # require privlaged acces, while the 'package' module does.
@@ -41,3 +38,6 @@
     - setup
     - update
 
+- name: Install software from installers list
+  include_tasks: ../../shared/tasks/check_and_install.yml
+  loop: "{{ installers }}"
