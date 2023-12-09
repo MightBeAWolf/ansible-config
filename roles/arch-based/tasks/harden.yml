@@ -15,7 +15,6 @@
     - { regexp: '^X11Forwarding', line: 'X11Forwarding no' }
     - { regexp: '^IgnoreRhosts', line: 'IgnoreRhosts yes' }
     - { regexp: '^MaxAuthTries', line: 'MaxAuthTries 6' }
-    - { regexp: '^HashKnownHosts', line: 'HashKnownHosts yes' }
   notify:
     - Restart sshd
   become: true
