@@ -1,5 +1,7 @@
 ---
 
+# See https://linux-audit.com/audit-and-harden-your-ssh-configuration/
+# for the hardening methods imployed for ssh
 - name: Ensure secure SSH configuration
   lineinfile:
     path: /etc/ssh/sshd_config
@@ -7,9 +9,13 @@
     line: "{{ item.line }}"
   loop:
     - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no' }
-    - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no' }
+    - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication yes' }
     - { regexp: '^PermitEmptyPasswords', line: 'PermitEmptyPasswords no' }
     - { regexp: '^ChallengeResponseAuthentication', line: 'ChallengeResponseAuthentication no' }
+    - { regexp: '^X11Forwarding', line: 'X11Forwarding no' }
+    - { regexp: '^IgnoreRhosts', line: 'IgnoreRhosts yes' }
+    - { regexp: '^MaxAuthTries', line: 'MaxAuthTries 6' }
+    - { regexp: '^HashKnownHosts', line: 'HashKnownHosts yes' }
   notify:
     - Restart sshd
   become: true
