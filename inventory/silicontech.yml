@@ -2,13 +2,30 @@ all:
   hosts:
     olympic.sti.com:
       ansible_user: tommy
+    sti5.sti.com:
+      ansible_user: tommy
+    fileserver.sti.com:
+      ansible_user: tommy
+    yellowstone.sti.com:
+      ansible_user: tommy
 
 centos_stream8:
   hosts:
-    olympic.sti.com
+    olympic.sti.com:
+
+redhat7:
+  hosts:
+    fileserver.sti.com:
+    yellowstone.sti.com:
+
+ubuntu:
+  hosts:
+    sti5.sti.com:
 
 
 workstation:
   hosts:
-    olympic.sti.com
+    olympic.sti.com:
+    yellowstone.sti.com:
+    sti5.sti.com:
 

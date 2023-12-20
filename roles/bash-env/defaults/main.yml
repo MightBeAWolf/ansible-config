@@ -2,15 +2,15 @@ installers:
   - name: "Rust"
     check: "test -e {{ ansible_env.HOME }}/.cargo/bin/cargo"
     file: "00-rust.sh"
-  - name: "Starship"
-    check: "which starship"
-    file: "00-starship.sh"
-  - name: "Helix"
-    check: "test -e {{ ansible_env.HOME }}/.cargo/bin/helix || test -e {{ ansible_env.HOME }}/.cargo/bin/hx"
-    file: "01-helix.sh"
   - name: "Fuzzy Finder"
     check: "test -e ${HOME}/.fzf"
     file: "01-fzf.sh"
+  - name: "Helix"
+    check: "test -e {{ ansible_env.HOME }}/.cargo/bin/helix || test -e {{ ansible_env.HOME }}/.cargo/bin/hx"
+    file: "01-helix.sh"
+  - name: "Starship"
+    check: "which starship"
+    file: "00-starship.sh"
 
 config_repo_url: https://github.com/MightBeAWolf/dot-config.git
 config_branch: main
