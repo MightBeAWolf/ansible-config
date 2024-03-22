@@ -1,0 +1,7 @@
+IdentitiesOnly yes
+AddKeysToAgent yes
+
+MATCH host "*.sti.com"
+    User tommy
+    IdentityFile ~/.ssh/id_ed25519
+
