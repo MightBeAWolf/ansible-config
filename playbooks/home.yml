@@ -5,6 +5,7 @@
     - role: arch-based
     - role: bash-env
     - role: podman
+    - role: home-env
 
 - hosts: linux
   roles:

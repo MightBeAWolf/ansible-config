@@ -9,7 +9,7 @@ installers:
     check: "test -e {{ ansible_env.HOME }}/.cargo/bin/helix || test -e {{ ansible_env.HOME }}/.cargo/bin/hx"
     file: "01-helix.sh"
   - name: "Starship"
-    check: "which starship"
+    check: "which starship || test -e {{ ansible_env.HOME }}/.local/bin/starship"
     file: "00-starship.sh"
 
 config_repo_url: https://github.com/MightBeAWolf/dot-config.git
