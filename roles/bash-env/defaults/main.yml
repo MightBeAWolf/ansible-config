@@ -16,5 +16,4 @@ config_repo_url: https://github.com/MightBeAWolf/dot-config.git
 config_branch: main
 configs:
   - helix
-  - thefuck
   - starship.toml

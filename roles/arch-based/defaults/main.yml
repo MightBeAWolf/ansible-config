@@ -45,7 +45,6 @@ packages:
     - nss-pam-ldapd
     # shell customization
     - vivid
-    - thefuck
     - starship
     - ttf-firacode-nerd
 
