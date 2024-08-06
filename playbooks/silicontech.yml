@@ -1,6 +1,7 @@
 ---
 
-- hosts: workstation
+- hosts: localhost
+  connection: local
   roles:
     - role: bash-env
     - role: work-env
