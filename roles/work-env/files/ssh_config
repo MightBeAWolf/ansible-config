@@ -1,12 +1,1 @@
-IdentitiesOnly yes
 AddKeysToAgent yes
-
-MATCH host "gitea,10.2.40.6"
-    HostName 10.2.40.6
-    User gitea
-    Port 222
-    IdentityFile ~/.ssh/id_ed25519
-
-MATCH host "*.sti.com"
-    IdentityFile ~/.ssh/id_ed25519
-

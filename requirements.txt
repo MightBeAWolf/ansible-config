@@ -1,2 +1,4 @@
 ansible
 ansible-lint
+
+psutil # Used by some ansible modules

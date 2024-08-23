@@ -1,0 +1,9 @@
+---
+
+- ansible.builtin.import_playbook: work-base.yml
+
+- hosts: localhost
+  connection: local
+  roles:
+    - role: gnome_40
+

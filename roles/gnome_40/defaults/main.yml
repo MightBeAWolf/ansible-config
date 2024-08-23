@@ -1,0 +1,46 @@
+gnome_40_config:
+  night_light:
+    enabled: true
+    temperature: 2700
+  adjust_brightness_to_ambient: false
+  idle_dimming: true
+  idle_delay: 300
+  automatic_power_saver: true
+  sleep:
+    while_plugged_in: 'nothing'
+    while_plugged_in_delay: '1200'
+    while_unplugged: 'suspend'
+    while_unplugged_delay: '1200'
+  power_button_action: 'interactive'
+  show_battery_percentage: true
+
+  desktop:
+    enable_hot_corners: true
+    enable_tiling: true
+    workspaces:
+      enabled_for_all_displays: true
+      dynamic: true
+      count: 4
+      restrict_app_switching_to_current_workspace: true
+    theme: 'prefer-dark'
+
+  notifications:
+    show_on_lock_screen: false
+
+  mouse_and_touchpad:
+    left_handed: false
+    pointer_speed_mod: 0.0
+    mouse_acceleration: 'default'
+    mouse_natural_scrolling: false
+    touchpad_natural_scrolling: false
+    disable_touchpad_while_typing: true
+    touchpad_right_click_method: 'areas'
+    enable_touchpad_tap_to_click: true
+
+  privacy:
+    screen_lock:
+      enabled: true
+      delay_after_idle: 30
+
+
+

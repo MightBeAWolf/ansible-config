@@ -1,0 +1,6 @@
+---
+- name: dependencies | Install Fedora-40 Gnome configuration dependencies
+  ansible.builtin.dnf:
+    name: python3-psutil
+    state: present
+  become: true

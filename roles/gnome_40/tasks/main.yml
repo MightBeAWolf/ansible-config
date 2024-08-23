@@ -1,0 +1,193 @@
+---
+
+- name: gnome_40 | Install Gnome Config Dependencies Block
+  block:
+    - name: Check if the dependency file exists
+      ansible.builtin.stat:
+        path: "{{ role_path }}/tasks/dependencies/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+      register: dependency_file
+      delegate_to: localhost
+      connection: local
+
+    - name: gnome_40 | Install Gnome Config Dependencies
+      ansible.builtin.include_tasks: "dependencies/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+      when: dependency_file.stat.exists
+
+
+- name: gnome_40 | Display Settings
+  block:
+  - name: gnome_40 | Turn on night-light
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+      value: "{{ gnome_40_config.enabled | default(false) }}"
+
+  - name: gnome_40 | Set night-light schedule to automatic
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic
+      value: true
+    when: gnome_40_config.enabled | default(false)
+
+  - name: gnome_40 | Set night-light temperature
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/color/night-light-temperature
+      value: "{{ gnome_40_config.temperature | default(2700) }}"
+    when: (gnome_40_config.enabled | default(false))
+
+- name: gnome_40 | Power Settings
+  block:
+
+  - name: gnome_40 | Automatic screen brightness
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/power/ambient-enabled
+      value: "{{ gnome_40_config.adjust_brightness_to_ambient | default(false) }}"
+
+  - name: gnome_40 | Idle screen dimming
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/power/idle-dim
+      value: "{{ gnome_40_config.idle_dimming | default(true) }}"
+
+  - name: gnome_40 | Idle screen turn-off
+    community.general.dconf:
+      key: /org/gnome/desktop/session/idle-delay
+      value: "{{ gnome_40_config.idle_delay | default(300) }}"
+
+  - name: gnome_40 | Automatic power saver mode
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/power/power-saver-profile-on-low-battery
+      value: "{{ gnome_40_config.automatic_power_saver | default(true) }}"
+
+  - name: gnome_40 | Configure sleep settings
+    community.general.dconf:
+      key: "/org/gnome/settings-daemon/plugins/power/{{ gnome_40_sleep.key }}"
+      value: "'{{ gnome_40_sleep.value }}'"
+    loop:
+      - key: sleep-inactive-ac-type
+        value: "{{ gnome_40_config.sleep.while_plugged_in | default('nothing') }}"
+      - key: sleep-inactive-ac-timeout
+        value: "{{ gnome_40_config.sleep.while_plugged_in_delay | default('1200') }}"
+      - key: sleep-inactive-battery-type
+        value: "{{ gnome_40_config.sleep.while_unplugged | default('suspend') }}"
+      - key: sleep-inactive-battery-timeout
+        value: "{{ gnome_40_config.sleep.while_unplugged_delay | default('1200') }}"
+    loop_control:
+      loop_var: gnome_40_sleep
+
+  - name: gnome_40 | Power button mode
+    community.general.dconf:
+      key: /org/gnome/settings-daemon/plugins/power/power-button-action
+      value: "'{{ gnome_40_config.power_button_action | default('suspend') }}'"
+
+  - name: gnome_40 | Show battery percentage
+    community.general.dconf:
+      key: /org/gnome/desktop/interface/show-battery-percentage
+      value: "{{ gnome_40_config.show_battery_percentage | default('true') }}"
+
+- name: gnome_40 | Desktop settings
+  block:
+
+  - name: gnome_40 | Hot corners
+    community.general.dconf:
+      key: /org/gnome/desktop/interface/enable-hot-corners
+      value: "{{ gnome_40_config.desktop.enable_hot_corners | default(false) }}"
+
+  - name: gnome_40 | Tiling
+    community.general.dconf:
+      key: /org/gnome/mutter/edge-tiling
+      value: "{{ gnome_40_config.desktop.enable_tiling | default(true) }}"
+
+  - name: gnome_40 | Dynamic workspaces
+    community.general.dconf:
+      key: /org/gnome/mutter/dynamic-workspaces
+      value: "{{ gnome_40_config.desktop.workspaces.dynamic | default(true) }}"
+
+  - name: gnome_40 | Workspace number
+    community.general.dconf:
+      key: /org/gnome/desktop/wm/preferences/num-workspaces
+      value: "{{ gnome_40_config.desktop.workspaces.count | default(4) }}"
+    when: not (gnome_40_config.desktop.workspaces.dynamic | default(true))
+
+  - name: gnome_40 | Workspaces enabled for all displays
+    community.general.dconf:
+      key: /org/gnome/mutter/workspaces-only-on-primary
+      value: "{{ not (gnome_40_config.desktop.workspaces.enabled_for_all_displays | default(true)) }}"
+
+  - name: gnome_40 | Workspaces app switching
+    community.general.dconf:
+      key: /org/gnome/shell/app-switcher/current-workspace-only
+      value: "{{ gnome_40_config.desktop.workspaces.restrict_app_switching_to_current_workspace | default(true) }}"
+
+  - name: gnome_40 | Color theme
+    community.general.dconf:
+      key: /org/gnome/desktop/interface/color-scheme
+      value: "'{{ gnome_40_config.desktop.theme | default('prefer-dark') }}'"
+
+- name: gnome_40 | Notifications settings
+  block:
+  - name: gnome_40 | Show notifications on lock screen
+    community.general.dconf:
+      key: /org/gnome/desktop/notifications/show-in-lock-screen
+      value: "{{ gnome_40_config.notifications.show_on_lock_screen | default(false) }}"
+
+- name: gnome_40 | Mouse and Touchpad settings
+  block:
+  - name: gnome_40 | Right or Left handed mouse
+    community.general.dconf:
+      key: /org/gnome/desktop/peripherals/mouse/left-handed
+      value: "{{ gnome_40_config.mouse_and_touchpad.left_handed | default(false) }}"
+
+  - name: gnome_40 | Pointer speed
+    community.general.dconf:
+      key: "{{ gnome_40_pointer_speed_key }}"
+      value: "{{ gnome_40_config.mouse_and_touchpad.pointer_speed_mod | default(0.0) }}"
+    loop:
+      - /org/gnome/desktop/peripherals/mouse/speed
+      - /org/gnome/desktop/peripherals/touchpad/speed
+    loop_control:
+      loop_var: gnome_40_pointer_speed_key
+
+  - name: gnome_40 | Disable touchpad while typing
+    community.general.dconf:
+      key: /org/gnome/desktop/peripherals/touchpad/disable-while-typing
+      value: "{{ disable_touchpad_while_typing | default(true) }}"
+
+  - name: gnome_40 | Mouse Acceleration
+    community.general.dconf:
+      key: /org/gnome/desktop/peripherals/mouse/accel-profile
+      value: "'{{ gnome_40_config.mouse_and_touchpad.mouse_acceleration | default('default') }}'"
+
+  - name: gnome_40 | Touchpad right-click method
+    community.general.dconf:
+      key: /org/gnome/desktop/peripherals/touchpad/click-method 
+      value: "'{{ touchpad_right_click_method | default('areas') }}'"
+
+  - name: gnome_40 | Enable touchpad tap to click
+    community.general.dconf:
+      key: /org/gnome/desktop/peripherals/touchpad/tap-to-click
+      value: "{{ enable_touchpad_tap_to_click | default(true) }}"
+
+  - name: gnome_40 | Scrolling profile
+    community.general.dconf:
+      key: "/org/gnome/desktop/peripherals/{{ gnome_40_natural_scroll.key }}/natural-scroll"
+      value: "{{ gnome_40_natural_scroll.value }}"
+    loop:
+      - key: mouse
+        value: "{{ mouse_natural_scrolling | default(false) }}"
+      - key: touchpad
+        value: "{{ touchpad_natural_scrolling | default(false) }}"
+    loop_control:
+      loop_var: gnome_40_natural_scroll
+
+- name: gnome_40 | Privacy Settings
+  block:
+  - name: gnome_40 | Idle Lock
+    community.general.dconf:
+      key: "/org/gnome/desktop/screensaver{{gnome_40_lock.key}}"
+      value: "{{gnome_40_lock.value}}"
+    loop:
+      - key: lock-enabled
+        value: "{{ gnome_40_config.privacy.screen_lock.enabled | default(true) }}"
+      - key: lock-delay
+        value: "{{ gnome_40_config.privacy.screen_lock.delay_after_idle | default('0') }}"
+    loop_control:
+      loop_var: gnome_40_lock
+
