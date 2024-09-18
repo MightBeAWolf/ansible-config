@@ -1,28 +1,16 @@
 ---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - ansible.builtin.setup:
 
-- hosts: arch_based
+- ansible.builtin.import_playbook: "dependencies/main.yml"
+
+- hosts: localhost
+  connection: local
   roles:
-    - role: arch-based
     - role: bash-env
-    - role: podman
-    - role: home-env
 
-- hosts: linux
-  roles:
-    - role: bash-env
+- ansible.builtin.import_playbook: "distro/main.yml"
 
-# Not synology linux machines
-- hosts: linux:!synology:!down
-  roles:
-    # - role: dns-client
 
-###################################
-####### Host Specific Roles #######
-###################################
-- hosts: carnivore
-  roles:
-    - role: sway
-
-- hosts: bite
-  roles:
-    - role: dns-server

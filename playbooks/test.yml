@@ -1,6 +1,0 @@
----
-
-- hosts: linux:!down
-  roles:
-    - role: dns-client
-
