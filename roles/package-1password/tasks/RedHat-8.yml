@@ -1,0 +1,21 @@
+- name: Import the 1Password public key
+  rpm_key:
+    state: present
+    key: https://downloads.1password.com/linux/keys/1password.asc
+  become: yes
+
+- name: Enable 1Password RPM Repo
+  copy:
+    src: 1password.rpm.repo
+    dest: /etc/yum.repos.d
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Install 1Password CLI
+  dnf:
+    name: 1password-cli, 1password
+    state: present
+  become: yes
+

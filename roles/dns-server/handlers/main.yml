@@ -1,4 +1,0 @@
----
-- name: Restart the DNS
-  import_tasks: ../tasks/restart-dns.yml
-

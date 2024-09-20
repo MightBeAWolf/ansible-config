@@ -10,6 +10,7 @@
   connection: local
   roles:
     - role: bash-env
+    - role: package-1password
 
 - ansible.builtin.import_playbook: "distro/main.yml"
 
