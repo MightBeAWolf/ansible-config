@@ -1,0 +1,7 @@
+---
+- ansible.builtin.import_playbook: home-base.yml
+
+- hosts: localhost
+  connection: local
+  roles:
+    - mac_address_randomization

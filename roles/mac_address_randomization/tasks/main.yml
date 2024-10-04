@@ -1,0 +1,12 @@
+---
+# See https://linux-audit.com/audit-and-harden-your-ssh-configuration/
+# for the hardening methods imployed for ssh
+- name: Ensure MAC address radomization by default
+  ansible.builtin.copy:
+    src: 30-mac-randomization.conf
+    dest: /etc/NetworkManager/conf.d/30-mac-randomization.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify: Restart NetworkManager
