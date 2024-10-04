@@ -2,6 +2,33 @@
 
 - hosts: localhost
   connection: local
+  gather_facts: false
+  tasks:
+  - name: Install packages
+    ansible.builtin.dnf: 
+      name:
+        # development
+        - ShellCheck
+        # cli tools
+        - eza
+        - bat
+        - helix
+        - git
+        - fd-find
+        - ripgrep
+        - git-delta
+        - sd
+        # System
+        - htop
+        - bash-completion
+        - procs
+        # misc
+        - flameshot
+      state: present
+  become: true
+
+- hosts: localhost
+  connection: local
   roles:
     - role: gnome_40
 
