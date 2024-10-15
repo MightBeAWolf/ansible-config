@@ -5,3 +5,4 @@
   connection: local
   roles:
     - mac_address_randomization
+    - homevpn_autoconnect

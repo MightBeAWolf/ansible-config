@@ -1,0 +1,9 @@
+---
+- name: Create NetworkManager dispatcher script from template
+  template:
+    src: "99-vpn-auto.j2"
+    dest: "{{ dispatcher_script_path }}/99-vpn-auto"
+    mode: "0755"
+    owner: root
+    group: root
+  become: true
