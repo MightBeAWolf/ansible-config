@@ -1,0 +1,23 @@
+#!/bin/bash
+# Dispatcher arguments
+INTERFACE=$1
+STATUS=$2
+
+# The connection we do NOT want to trigger the VPN on
+EXCLUDED_CONNECTION="Wolfhouse"
+
+# The VPN connection we want to activate
+VPN_CONNECTION="vpn-home"
+
+# Check if the connection is up
+if [ "$STATUS" = "up" ]; then
+  # Get the name of the current connection
+  ACTIVE_CONNECTION=$(nmcli -t -f NAME,DEVICE connection show --active | grep "$INTERFACE" | cut -d: -f1)
+  # Only activate the VPN if the active connection is NOT the excluded one
+  if [[ "${ACTIVE_CONNECTION:?}" != "${EXCLUDED_CONNECTION:?}" ]]
+  && [[ "${ACTIVE_CONNECTION:?}" != "${VPN_CONNECTION:?}" ]]; then
+    echo "$0: Activating VPN $VPN_CONNECTION for connection $ACTIVE_CONNECTION..."
+    nmcli connection up "$VPN_CONNECTION"
+  fi
+fi
+
