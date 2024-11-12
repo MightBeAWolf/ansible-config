@@ -17,3 +17,4 @@ config_branch: main
 configs:
   - helix
   - starship.toml
+  - mise
