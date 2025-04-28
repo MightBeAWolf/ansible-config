@@ -1,5 +1,12 @@
-- ansible.builtin.import_playbook: "./Fedora-40.yml"
-  when:
-    - ansible_distribution == "Fedora"
-    - ansible_distribution_major_version == "40"
+- name: Install OS-specific dependencies
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Check if OS-specific dependency playbook exists
+      ansible.builtin.stat:
+        path: "{{ playbook_dir }}/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+      register: os_dependency_playbook
+
+    - ansible.builtin.include_tasks: "./{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+      when: os_dependency_playbook.stat.exists
 

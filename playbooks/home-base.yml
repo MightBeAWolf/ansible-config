@@ -11,6 +11,7 @@
   roles:
     - role: bash-env
     - role: package-1password
+    - role: ldap_client
 
 - ansible.builtin.import_playbook: "distro/main.yml"
 

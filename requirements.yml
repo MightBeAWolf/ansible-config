@@ -1,0 +1,4 @@
+
+- name: ldap_client
+  src: https://github.com/MightBeAWolf/ansible_role_ldap_client
+  version: main

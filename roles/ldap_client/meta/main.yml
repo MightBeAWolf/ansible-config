@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  role_name: ldap_client
+  author: Thomas G Wolf
+  description: Configure a system as an LDAP client using SSSD and nsswitch.
+  license: MIT
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Debian
+      versions:
+        - "12"
+    - name: Fedora
+      versions:
+        - "40"
+        - "41"
+        - "42"
+    - name: RedHat
+      versions:
+        - "8"
+
+  galaxy_tags:
+    - ldap
+    - sssd
+    - authentication
+    - client
+    - linux
+
+dependencies: []
+

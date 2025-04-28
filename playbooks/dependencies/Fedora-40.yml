@@ -1,13 +1,8 @@
 ---
-
-- hosts: localhost
-  connection: local
-  tasks:
-    
-    - name: dependencies | Install dependency packages
-      ansible.builtin.dnf:
-        name: 
-          - gcc-c++
-        state: present
-      become: true
+- name: dependencies | Install dependency packages
+  ansible.builtin.dnf:
+    name: 
+      - gcc-c++
+    state: present
+  become: true
 
