@@ -1,0 +1,8 @@
+
+- name: Disable coredump
+  ansible.builtin.include_tasks:
+    file: coredump.yml
+
+- name: Harden shells
+  ansible.builtin.include_tasks:
+    file: shell.yml

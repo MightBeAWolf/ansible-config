@@ -12,6 +12,8 @@
     - role: bash-env
     - role: package-1password
     - role: ldap_client
+    - role: harden
+      tags: ['harden', 'security']
 
 - ansible.builtin.import_playbook: "distro/main.yml"
 

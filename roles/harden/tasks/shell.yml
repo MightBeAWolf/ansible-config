@@ -1,0 +1,19 @@
+# tasks/main.yml
+---
+- name: Ensure /etc/bashrc contains a strong umask (077)
+  ansible.builtin.lineinfile:
+    path: /etc/bashrc
+    regexp: '^umask\s+'
+    line: 'umask 077'
+    state: present
+    insertbefore: BOF
+  become: true
+
+- name: Ensure /etc/csh.cshrc contains a strong umask (077)
+  ansible.builtin.lineinfile:
+    path: /etc/csh.cshrc
+    regexp: '^umask\s+'
+    line: 'umask 077'
+    state: present
+    insertbefore: BOF
+  become: true

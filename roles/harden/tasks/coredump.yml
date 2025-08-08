@@ -1,0 +1,84 @@
+---
+# tasks/main.yml
+# ==============================================================
+# Disable core dumps everywhere we can.
+# * sysctl kernel limits
+# * /proc/sys/fs/core_pattern
+# * /etc/security/limits.d/*.conf (hard limits)
+# * userspace ulimit (if the shell startup file is present)
+# ==============================================================
+- name: Disable SUID/SGID core dumps
+  ansible.posix.sysctl:
+    name: fs.suid_dumpable
+    value: '0'
+    state: present
+    reload: true
+  become: true
+
+- name: Disable all core dumps
+  ansible.posix.sysctl:
+    name: kernel.core_pattern
+    value: '/dev/null'
+    state: present
+    reload: true
+  become: true
+
+- name: Remove stray core_pattern config files (if they exist)
+  ansible.builtin.file:
+    path: "/etc/sysctl.d/{{ item }}"
+    state: absent
+  loop:
+    - 99-disable-core-dump.conf
+    - 99-core-dump.conf
+  ignore_errors: true
+  become: true
+
+- name: Add hard core limit for all users
+  ansible.builtin.copy:
+    dest: /etc/security/limits.d/no-core.conf
+    content: |
+      # This file is managed by Ansible – do not edit by hand
+      * hard core 0
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Stat /etc/profile
+  ansible.builtin.stat:
+    path: /etc/profile
+  register: profile_stat
+  become: true
+
+- name: Add ulimit core=0 to /etc/profile
+  ansible.builtin.lineinfile:
+    path: /etc/profile
+    regexp: '^ulimit\s+-c\s+'
+    line: ulimit -c 0
+    state: present
+    create: true
+    mode: '0644'
+    owner: root
+    group: root
+  when: profile_stat.stat.exists
+  become: true
+
+- name: Stat /etc/bash.bashrc
+  ansible.builtin.stat:
+    path: /etc/bash.bashrc
+  register: bashrc_stat
+  become: true
+
+- name: Add ulimit core=0 to /etc/bash.bashrc
+  ansible.builtin.lineinfile:
+    path: /etc/bash.bashrc
+    regexp: '^ulimit\s+-c\s+'
+    line: ulimit -c 0
+    state: present
+    create: true
+    mode: '0644'
+    owner: root
+    group: root
+  when: bashrc_stat.stat.exists
+  become: true
+
